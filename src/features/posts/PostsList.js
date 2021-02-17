@@ -12,6 +12,14 @@ export const PostsList = () => {
 
   const dispatch = useDispatch()
 
+  const postStatus = useSelector((state) => state.posts.status)
+
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts())
+    }
+  }, [postStatus, dispatch])
+
   // Sort posts in reverse chronological order by datetime string
   const orderedPosts = posts
     .slice()
