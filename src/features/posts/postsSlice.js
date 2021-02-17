@@ -12,6 +12,17 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   return response.posts
 })
 
+export const addNewPost = createAsyncThunk(
+  'posts/addNewPost',
+  //payload creator receives the partical `{title, content, user}` object
+  async (initialPost) => {
+    //we send the initial data to the fake API server
+    const response = await client.post('/fakeApi/posts', { post: initialPost })
+    //The response includes the complete post object, including unique ID
+    return response.post
+  }
+)
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
