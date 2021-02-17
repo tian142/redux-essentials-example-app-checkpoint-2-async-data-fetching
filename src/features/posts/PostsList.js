@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import { PostAuthor } from './PostAuthor'
-import { TimeAgo } from './TimeAgo'
-import { ReactionButtons } from './ReactionButtons'
 import { selectAllPosts, fetchPosts } from './postsSlice'
+
+import { PostExcerpt } from './PostExcerpt'
 
 export const PostsList = () => {
   const posts = useSelector(selectAllPosts)
@@ -31,7 +29,7 @@ export const PostsList = () => {
       .sort((a, b) => b.date.localeCompare(a.date))
 
     content = orderedPosts.map((post) => (
-      <PostExcerpt key={post.id} post={posts} />
+      <PostExcerpt key={post.id} post={post} />
     ))
   } else if (postStatus === 'failed') {
     content = <div>{error}</div>
