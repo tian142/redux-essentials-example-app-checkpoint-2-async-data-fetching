@@ -78,6 +78,9 @@ const postsSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
+    [addNewPost.fulfilled]: (state, action) => {
+      state.posts.push(action.payload)
+    },
   },
 })
 
